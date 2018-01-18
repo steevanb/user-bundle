@@ -1,0 +1,40 @@
+steevanb\UserBundle\Entity\AbstractUser:
+    properties:
+        username:
+            - NotBlank:
+                groups: register
+                message: user.username.empty
+            - Length:
+                groups: register
+                min: 2
+                minMessage: user.username.short
+                max: 50
+                maxMessage: user.username.long
+
+        plainPassword:
+            - NotBlank:
+                groups: register
+                message: user.plainPassword.empty
+            - Length:
+                groups: register
+                min: 5
+                minMessage: user.plainPassword.short
+                max: 4096
+                maxMessage: user.plainPassword.long
+
+        plainPasswordConfirmation:
+            - NotBlank:
+                groups: register
+                message: user.plainPasswordConfirmation.empty
+
+        email:
+            - NotBlank:
+                groups: register
+                message: user.email.empty
+            - Email:
+                groups: register
+                message: user.email.invalid
+
+    constraints:
+        - steevanb\UserBundle\Validator\Constraints\PlainPassword:
+            groups: register

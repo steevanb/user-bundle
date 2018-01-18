@@ -1,7 +1,6 @@
 {
     "name": "steevanb/user-bundle",
-    "license": "proprietary",
-    "type": "project",
+    "license": "MIT",
     "autoload": {
         "psr-4": {
             "steevanb\\UserBundle\\": "/"
@@ -9,8 +8,10 @@
     },
     "require": {
         "php": "^7.2.0",
-        "symfony/security-bundle": "4.0.*",
+        "symfony/security-bundle": "^4.0",
+        "symfony/form": "^4.0",
         "doctrine/orm": "^2.5.11",
-        "doctrine/doctrine-bundle": "^1.6.10"
+        "doctrine/doctrine-bundle": "^1.6.10",
+        "steevanb/symfony-form-options-builder": "^4.0"
     }
 }

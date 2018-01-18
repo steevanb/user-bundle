@@ -1,0 +1,13 @@
+user.username.empty: Vous devez indiquer le nom d'utilisateur.
+user.username.short: Vous devez indiquer un nom d'utilisateur d'au moins {{ limit }} caractères.
+user.username.long: Vous devez indiquer un nom d'utilisateur d'au maximum {{ limit }} caractères.
+
+user.plainPassword.empty: Vous devez indiquer le mot de passe.
+user.plainPassword.short: Le mot de passe doit faire au minimum {{ limit }} caractères.
+user.plainPassword.long: Le mot de passe ne doit pas dépasser {{ limit }} caractères.
+
+user.plainPasswordConfirmation.empty: Vous devez confirmer le mot de passe.
+user.plainPasswordConfirmation.different: Le mot de passe et sa confirmation sont différents.
+
+user.email.empty: Vous devez indiquer l'email.
+user.email.invalid: L'adresse e-mail indiquée n'est pas valide.
