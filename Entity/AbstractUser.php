@@ -29,6 +29,14 @@ abstract class AbstractUser implements UserInterface, \Serializable
     /** @var array */
     protected $roles = [];
 
+    /** @var \DateTime */
+    protected $createdAt;
+
+    public function __construct()
+    {
+        $this->setCreatedAt(new \DateTime());
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -166,5 +174,17 @@ abstract class AbstractUser implements UserInterface, \Serializable
             $this->username,
             $this->password
         ] = unserialize($serialized);
+    }
+
+    public function setCreatedAt(\DateTime $createdAt): self
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function getCreatedAt(): \DateTime
+    {
+        return $this->createdAt;
     }
 }
