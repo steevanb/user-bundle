@@ -154,6 +154,19 @@ abstract class AbstractUser implements UserInterface, \Serializable
         return $this;
     }
 
+    public function hasRole(string $role): bool
+    {
+        $return = false;
+        foreach ($this->getRoles() as $hasRole) {
+            if ($role === $hasRole) {
+                $return = true;
+                break;
+            }
+        }
+
+        return $return;
+    }
+
     public function eraseCredentials()
     {
     }

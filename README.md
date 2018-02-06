@@ -1,3 +1,5 @@
+[![version](https://img.shields.io/badge/version-dev-red.svg)](https://github.com/steevanb/user-bundle)
+
 ```php
 # config/bundles.php
 return [
@@ -28,6 +30,12 @@ security:
             form_login:
                 login_path: login
                 check_path: login
+                default_target_path: index
+                username_parameter: login[username]
+                password_parameter: login[password]
+                csrf_parameter: login[_token]
+            logout:
+                path: logout
     access_control:
         - { path: ^/(fr|en)/my-account, roles: ROLE_USER }
 ```
@@ -35,12 +43,13 @@ security:
 ```yml
 # config/routes.yaml
 register:
-    path: /{_locale}/register
+    path: /register
     controller: App\Controller\SecurityController::register
 
 login:
-    path: /{_locale}/login
+    path: /login
     controller: App\Controller\SecurityController::login
-```
 
-{{ form(form, {'attr': {'novalidate': 'novalidate'}}) }}
+logout:
+    path: /logout
+```
