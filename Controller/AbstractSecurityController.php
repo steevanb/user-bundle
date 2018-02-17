@@ -88,7 +88,12 @@ abstract class AbstractSecurityController extends Controller
         $user = $this->createUser();
         $user->setUsername($this->container->get('security.authentication_utils')->getLastUsername());
 
-        return $this->createForm(LoginType::class, $user);
+        return $this->createForm($this->getLoginType(), $user);
+    }
+
+    protected function getLoginType(): string
+    {
+        return LoginType::class;
     }
 
     protected function getLoginTemplateName(): string
