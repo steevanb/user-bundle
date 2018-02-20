@@ -14,6 +14,11 @@ use Symfony\Component\HttpFoundation\{
     Request,
     Response
 };
+use Symfony\Component\Security\{
+    Core\Authentication\Token\UsernamePasswordToken,
+    Core\User\UserInterface,
+    Http\Event\InteractiveLoginEvent
+};
 
 abstract class AbstractSecurityController extends Controller
 {
@@ -38,6 +43,9 @@ abstract class AbstractSecurityController extends Controller
             $manager->persist($form->getData());
             $manager->flush();
 
+            if ($this->isAutoLoginAfterRegistration()) {
+                $this->loginUser($form->getData(), $request);
+            }
             $return = $this->createRegisteredResponse();
         } else {
             $return = $this->render(
@@ -109,5 +117,33 @@ abstract class AbstractSecurityController extends Controller
                 ? $this->get('translator')->trans('connexion.error', [], 'security')
                 : null
         ];
+    }
+
+    protected function isAutoLoginAfterRegistration(): bool
+    {
+        return true;
+    }
+
+    protected function loginUser(UserInterface $user, Request $request): self
+    {
+        $token = new UsernamePasswordToken(
+            $user,
+            $user->getPassword(),
+            'main',
+            $user->getRoles()
+        );
+        $this->container->get('security.token_storage')->setToken($token);
+
+        $event = new InteractiveLoginEvent($request, $token);
+        $this->container->get('event_dispatcher')->dispatch('security.interactive_login', $event);
+
+        // http://symfony.com/doc/current/testing/http_authentication.html
+        $session = $this->container->get('session');
+        $session->set('_security_main', serialize($token));
+        $session->save();
+
+        $request->cookies->set($session->getName(), $session->getId());
+
+        return $this;
     }
 }
