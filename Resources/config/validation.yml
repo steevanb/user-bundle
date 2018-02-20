@@ -37,6 +37,11 @@ steevanb\UserBundle\Entity\AbstractUser:
 
     constraints:
         - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity:
+            fields: username
+            groups: register
+            message: user.username.exists
+
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity:
             fields: email
             groups: register
             message: user.email.exists
