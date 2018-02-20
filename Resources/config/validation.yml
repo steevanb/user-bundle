@@ -36,5 +36,10 @@ steevanb\UserBundle\Entity\AbstractUser:
                 message: user.email.invalid
 
     constraints:
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity:
+            fields: email
+            groups: register
+            message: user.email.exists
+
         - steevanb\UserBundle\Validator\Constraints\PlainPassword:
             groups: register

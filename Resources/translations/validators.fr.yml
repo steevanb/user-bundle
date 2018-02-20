@@ -11,3 +11,4 @@ user.plainPasswordConfirmation.different: Le mot de passe et sa confirmation son
 
 user.email.empty: Vous devez indiquer l'email.
 user.email.invalid: L'adresse e-mail indiquée n'est pas valide.
+user.email.exists: L'adresse e-mail est déjà utilisée.

@@ -1,1 +1,14 @@
-user.username.empty: You must specify the username.
+user.username.empty: You must specity the username.
+user.username.short: You must specify an username with at least {{ limit }} characters.
+user.username.long: You must specify an username with a maximum of {{ limit }} characters.
+
+user.plainPassword.empty: You must specity the password.
+user.plainPassword.short: You must specify a password with at least {{ limit }} characters.
+user.plainPassword.long: You must specify a password with a maximum of {{ limit }} characters.
+
+user.plainPasswordConfirmation.empty: You must confirm password.
+user.plainPasswordConfirmation.different: Password and it's confirmation are differents.
+
+user.email.empty: You must specify e-mail.
+user.email.invalid: Email is not valid.
+user.email.exists: This e-mail already exists.
