@@ -23,18 +23,42 @@ abstract class AbstractRegisterType extends AbstractType
         $resolver->setDefaults(
             RootFormOptionsBuilder::create()
                 ->setValidationGroups(['register'])
+                ->setTranslationDomain('register')
                 ->asArray()
         );
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        $builder->add(...TextOptionsBuilder::create()->asVariadic('username'));
+        $builder->add(...$this->createUserNameOptionsBuilder()->asVariadic('username'));
+        $builder->add(...$this->createPlainPasswordOptionsBuilder()->asVariadic('plainPassword'));
+        $builder->add(
+            ...$this->createPlainPasswordConfirmationOptionsBuilder()->asVariadic('plainPasswordConfirmation')
+        );
+        $builder->add(...$this->createEmailOptionsBuilder()->asVariadic('email'));
+    }
 
-        $builder->add(...PasswordOptionsBuilder::create()->asVariadic('plainPassword'));
+    protected function createUserNameOptionsBuilder(): TextOptionsBuilder
+    {
+        return TextOptionsBuilder::create()
+            ->setLabel('user.username');
+    }
 
-        $builder->add(...PasswordOptionsBuilder::create()->asVariadic('plainPasswordConfirmation'));
+    protected function createPlainPasswordOptionsBuilder(): PasswordOptionsBuilder
+    {
+        return PasswordOptionsBuilder::create()
+            ->setLabel('user.plainPassword');
+    }
 
-        $builder->add(...EmailOptionsBuilder::create()->asVariadic('email'));
+    protected function createPlainPasswordConfirmationOptionsBuilder(): PasswordOptionsBuilder
+    {
+        return PasswordOptionsBuilder::create()
+            ->setLabel('user.plainPasswordConfirmation');
+    }
+
+    protected function createEmailOptionsBuilder(): EmailOptionsBuilder
+    {
+        return EmailOptionsBuilder::create()
+            ->setLabel('user.email');
     }
 }
