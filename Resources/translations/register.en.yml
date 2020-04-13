@@ -1,0 +1,4 @@
+user.username: Login
+user.plainPassword: Password
+user.plainPasswordConfirmation: Password confirmation
+user.email: Email
